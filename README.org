@@ -1,0 +1,67 @@
+#+OPTIONS: ^:nil tags:nil
+
+* About
+
+Automatically reopen current file with sudo. If file is read-only, reopen it after read-only mode is toggled.
+
+* Table of Contents                                       :TOC_2_gh:QUOTE:
+#+BEGIN_QUOTE
+- [[#about][About]]
+- [[#requirements][Requirements]]
+- [[#installation][Installation]]
+  - [[#with-use-package-and-straightel][With use-package and straight.el]]
+  - [[#manual-installation][Manual installation]]
+- [[#usage][Usage]]
+  - [[#minor-mode][Minor mode]]
+  - [[#customization][Customization]]
+#+END_QUOTE
+
+* Requirements
+
+| Name  | Version |
+|-------+---------|
+| Emacs |    26.1 |
+
+
+* Installation
+
+** With use-package and straight.el
+#+begin_src elisp :eval no
+(use-package auto-sudo
+  :straight (auto-sudo
+             :repo "KarimAziev/auto-sudo"
+             :type git
+             :host github)
+  :commands (auto-sudo-edit-mode))
+#+end_src
+
+** Manual installation
+
+Download the source code and put it wherever you like, e.g. into =~/.emacs.d/auto-sudo/=
+
+#+begin_src shell :eval no
+git clone https://github.com/KarimAziev/auto-sudo.git ~/.emacs.d/auto-sudo/
+#+end_src
+
+Add the downloaded directory to the load path:
+
+#+begin_src elisp :eval no
+(add-to-list 'load-path "~/.emacs.d/auto-sudo/")
+(require 'auto-sudo)
+(auto-sudo-edit-mode)
+#+end_src
+
+* Usage
+
+** Minor mode
+
+**** ~M-x auto-sudo-edit-mode~
+Allow automatic editing for remote files with sudo when this mode on.
+
+After a buffer is loaded from a file that belongs to sudo user and buffer is not read-only reopen it with tramp.
+
+If buffer is read-only, reopen it after read-only mode is toggled. If =auto-sudo-edit-ask= is non nil, also prompt the user for confirmation before reopening.
+** Customization
+
+**** ~auto-sudo-edit-ask~
+Whether to ask for confirmation for auto sudo edit.
