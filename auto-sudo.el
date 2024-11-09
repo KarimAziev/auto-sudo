@@ -152,7 +152,7 @@ confirmation before reopening."
             remote-info
             (car remote-info)
             (cdr remote-info))
-           (when-let ((tramp-path (and
+           (when-let* ((tramp-path (and
                                    (not (and (tramp-tramp-file-p
                                               buffer-file-name)
                                              (tramp-sh-handle-file-writable-p
